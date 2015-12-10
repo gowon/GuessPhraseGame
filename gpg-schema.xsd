@@ -12,37 +12,29 @@
     </xs:restriction>
 </xs:simpleType>
 
-<!-- -->
-
 <xs:complexType name="categorytype">
-  <xsd:simpleContent>
-    <xsd:extension base="stringtype">
+  <xs:simpleContent>
+    <xs:extension base="stringtype">
       <xs:attribute name="name" type="stringtype" use="required"/>
       <xs:attribute name="id" type="stringtype" use="required"/>
-    </xsd:extension>
-  </xsd:simpleContent>
-</xs:complexType>
-
-<xs:complexType name="guesstype">
-  <xsd:simpleContent>
-    <xsd:extension base="stringtype">
-      <xs:attribute name="category" type="stringtype"/>
-    </xsd:extension>
-  </xsd:simpleContent>
+    </xs:extension>
+  </xs:simpleContent>
 </xs:complexType>
 
 <xs:complexType name="phrasetype">
   <xs:sequence>
-    <xs:element name="guess" minOccurs="1" maxOccurs="1" type="guesstype"/>
+    <xs:element name="guess" minOccurs="1" maxOccurs="1" type="stringtype"/>
     <xs:element name="buzz" minOccurs="5" maxOccurs="unbounded" type="stringtype"/>
   </xs:sequence>
   <xs:attribute name="difficulty" type="difficultytype" use="required"/>
+  <xs:attribute name="category" type="stringtype" use="optional"/>
+  <xs:attribute name="id" type="stringtype" use="optional"/>
 </xs:complexType>
 
 <xs:complexType name="settype">
   <xs:sequence>
-    <xs:element name="category" maxOccurs="unbounded" type="categorytype"/>
-    <xs:element name="phrase" maxOccurs="unbounded" type="phrasetype"/>
+    <xs:element name="category" minOccurs="0" maxOccurs="unbounded" type="categorytype"/>
+    <xs:element name="phrase" minOccurs="0" maxOccurs="unbounded" type="phrasetype"/>
   </xs:sequence>
   <xs:attribute name="id" type="stringtype" use="required"/>
 </xs:complexType>
