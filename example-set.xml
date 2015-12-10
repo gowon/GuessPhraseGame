@@ -13,7 +13,7 @@
     <buzz>Goal</buzz>
   </phrase>
   
-  <phrase difficulty="1" category="trivia">
+  <phrase difficulty="10" category="trivia">
     <guess>Appliance</guess>
     <buzz>Range Oven</buzz>
     <buzz>Refrigerator</buzz>
