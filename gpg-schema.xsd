@@ -12,33 +12,47 @@
     </xs:restriction>
 </xs:simpleType>
 
-<xs:complexType name="categorytype">
-  <xs:simpleContent>
-    <xs:extension base="stringtype">
-      <xs:attribute name="name" type="stringtype" use="required"/>
-      <xs:attribute name="id" type="stringtype" use="required"/>
-    </xs:extension>
-  </xs:simpleContent>
-</xs:complexType>
+<xs:element name="set">
+  <xs:complexType>
+    <xs:sequence>
+      <xs:element ref="category" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element ref="phrase" minOccurs="0" maxOccurs="unbounded"/>    
+    </xs:sequence>
+    <xs:attribute name="id" type="xs:ID" use="required"/>
+  </xs:complexType>
 
-<xs:complexType name="phrasetype">
-  <xs:sequence>
-    <xs:element name="guess" minOccurs="1" maxOccurs="1" type="stringtype"/>
-    <xs:element name="buzz" minOccurs="5" maxOccurs="unbounded" type="stringtype"/>
-  </xs:sequence>
-  <xs:attribute name="difficulty" type="difficultytype" use="required"/>
-  <xs:attribute name="category" type="stringtype" use="optional"/>
-  <xs:attribute name="id" type="stringtype" use="optional"/>
-</xs:complexType>
+  <!--<xs:key name="CategoryKey">
+    <xs:selector xpath="category" />
+    <xs:field xpath="@id" />
+  </xs:key>
+  
+  <xs:keyref name="CategoryKeyRef" refer="CategoryKey">
+    <xs:selector xpath="phrase" />
+    <xs:field xpath="@category" />
+  </xs:keyref>-->
+</xs:element>
 
-<xs:complexType name="settype">
-  <xs:sequence>
-    <xs:element name="category" minOccurs="0" maxOccurs="unbounded" type="categorytype"/>
-    <xs:element name="phrase" minOccurs="0" maxOccurs="unbounded" type="phrasetype"/>
-  </xs:sequence>
-  <xs:attribute name="id" type="stringtype" use="required"/>
-</xs:complexType>
+<xs:element name="category">
+  <xs:complexType>
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="name" type="xs:NCName" use="required"/>
+        <xs:attribute name="id" type="xs:ID" use="required"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+</xs:element>
 
-<xs:element name="set" type="settype"/>
+<xs:element name="phrase">
+  <xs:complexType>
+    <xs:sequence>
+      <xs:element name="guess" minOccurs="1" maxOccurs="1" type="stringtype"/>
+      <xs:element name="buzz" minOccurs="5" maxOccurs="unbounded" type="stringtype"/>
+    </xs:sequence>
+    <xs:attribute name="difficulty" type="difficultytype" use="required"/>
+    <xs:attribute name="category" type="xs:IDREFS" use="optional"/>
+    <xs:attribute name="id" type="xs:ID" use="optional"/>
+  </xs:complexType>
+</xs:element>
 
 </xs:schema>
