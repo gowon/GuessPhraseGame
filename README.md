@@ -1,1 +1,1 @@
-# GuessPhraseGame
+# GPML - Guess Phrase Markup Language
